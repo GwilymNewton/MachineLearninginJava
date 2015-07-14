@@ -10,8 +10,8 @@ public class LinearHypothesis {
     
     private float  T0;
     private float  T1;
-    private float learning_rate_T0=0.2f;
-    private float learning_rate_T1=0.000001f;
+    private float learning_rate_T0=0.1f;
+    private float learning_rate_T1=0.1f;
     private float m;
     private TrainingSet training_data;
 
@@ -65,7 +65,7 @@ public class LinearHypothesis {
         return cost;
     }
     
-    public void StepOfGradientDecent()
+    private void StepOfGradientDecent()
     {
         float new_T0=0;
         float new_T1=0;
@@ -93,23 +93,36 @@ public class LinearHypothesis {
         return HypothesisFunction(x);
     }
         
-    public void learn()
+    /**
+     *
+     * @param max The maximum number of learning attempts
+     * @param goal A goal amount for the error cost to be under.
+     * 
+     * @return The number of steps before error < goal or 0 if 
+     * steps maxed out.
+     */
+    public int learn(int max, float goal)
     {
-        for(int i=0;i<Integer.MAX_VALUE;i++)
-        {
-        
-        StepOfGradientDecent();
-        if (Math.round(SquareCostFunction())==0)
-        {
-            // to impove this, it should be when the cost has not changed for
-            // X steps
-            //We should also let the user set the max steps, and return a value
-            //based on what triggers the break
-            
-            break;
-        }
+        for(int i=0;i<max;i++)
+        { 
+            StepOfGradientDecent();
+            if (SquareCostFunction() < goal)
+            {
+                return i;
+            }
         }    
+    return 0;
     }
+    
+    public int learn(int max, float goal, float lrt0, float lrt1)
+    {
+    this.learning_rate_T0=lrt0;
+    this.learning_rate_T1=lrt1;
+    return learn(max,goal);    
+        
+    }
+    
+    
     
 
 }
