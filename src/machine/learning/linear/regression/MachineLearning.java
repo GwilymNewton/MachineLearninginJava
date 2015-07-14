@@ -19,9 +19,7 @@ public class MachineLearning {
         File test_data = new File("TestTraining");
         TrainingSet test_data_set = new TrainingSet(test_data);
         LinearHypothesis hypothesis = new LinearHypothesis(test_data_set);
-        
         int step = hypothesis.learn(1000000,5f);
-        
         System.out.println("Step "+step+" T0="+hypothesis.getT0()+" T1="+hypothesis.getT1()+" Prediction of 100 = "+hypothesis.Predict(100)+" Cost="+hypothesis.SquareCostFunction());
     }
 }

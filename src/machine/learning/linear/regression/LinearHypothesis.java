@@ -22,6 +22,12 @@ public class LinearHypothesis {
         this.m=training_data.getTraining_data().size();
     }
 
+    /**
+     *
+     * @param T0 intial value for Tau0 
+     * @param T1 intial value for Tau1
+     * @param training_data The training set
+     */
     public LinearHypothesis(float T0, float T1, TrainingSet training_data) {
         this.T0 = T0;
         this.T1 = T1;
@@ -80,6 +86,11 @@ public class LinearHypothesis {
         
     }
     
+    /**
+     *
+     * @param x Pridicts y, based on x and the current hypothesis 
+     * @return
+     */
     public float Predict(float x)
     {
         return HypothesisFunction(x);
@@ -105,7 +116,16 @@ public class LinearHypothesis {
         }    
     return 0;
     }
-    
+    /**
+     *
+     * @param max The maximum number of learning attempts
+     * @param goal A goal amount for the error cost to be under.
+     * @param ltt0 learning rate for Tau0
+     * @param ltr1 learning rate for Tau1
+     * 
+     * @return The number of steps before error < goal or 0 if 
+     * steps maxed out.
+     */
     public int learn(int max, float goal, float lrt0, float lrt1)
     {
     this.learning_rate_T0=lrt0;
