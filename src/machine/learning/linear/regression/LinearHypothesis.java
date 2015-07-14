@@ -29,14 +29,6 @@ public class LinearHypothesis {
         this.m=training_data.getTraining_data().size();
     }
     
-    
-        public float getLearning_rate() {
-        return learning_rate_T1;
-    }
-
-    public void setLearning_rate(float learning_rate) {
-        this.learning_rate_T1 = learning_rate;
-    }
 
     public float getT0() {
         return T0;
